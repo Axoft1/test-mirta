@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchPosts } from "../../store/actions";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { Button, Spinner } from "react-bootstrap";
+import { fetchPosts } from "../../../store/actions";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { Spinner } from "react-bootstrap";
 import Post from "./Post";
-import { IPost } from "../types";
+import { IPost } from "../../types";
 
 const PostPage = () => {
   const dispatch = useDispatch();
@@ -14,20 +14,15 @@ const PostPage = () => {
   console.log(posts);
 
   useEffect(() => {
-  dispatch(fetchPosts());
-  }, [dispatch])
+    dispatch(fetchPosts());
+  }, [dispatch]);
 
   if (loading) {
     return <Spinner animation="border" />;
   }
-  //   if (!posts.length) {
-  //     return <button
-  //       className="btn btn-primary"
-  //       onClick={() => dispatch(fetchPosts())}
-  //     >Загрузить</button>
-  //   }
+
   return (
-    <div>      
+    <div>
       {posts.map((e: IPost) => (
         <Post key={e.id} props={e} />
       ))}
