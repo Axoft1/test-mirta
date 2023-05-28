@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchPosts } from "../../../store/actions";
+import { fetchPosts } from "../../../store/post-service/actions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Spinner } from "react-bootstrap";
 import Post from "./Post";
@@ -10,8 +10,8 @@ import { IPost } from "../../types";
 const PostPage = () => {
   const dispatch = useDispatch();
   const posts = useTypedSelector((state) => state.posts.posts);
-  const loading = useTypedSelector((state) => state.app.loading);
-  console.log(posts);
+  const loading = useTypedSelector((state) => state.posts.loading);
+  // console.log(posts);
 
   useEffect(() => {
     dispatch(fetchPosts());

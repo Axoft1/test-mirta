@@ -1,12 +1,14 @@
 import { applyMiddleware, compose, createStore } from "redux";
 import { rootReducer } from "./rootReducer";
 import createSagaMiddleware from "redux-saga";
-import { sagaWatcher } from "./sagas";
+import { sagaWatcherPosts } from "./post-service/saga-post";
+import { sagaWatcherComment } from "./comment-service/saga-comment";
 
 const saga = createSagaMiddleware();
 
 const store = createStore(rootReducer, compose(applyMiddleware(saga)));
-saga.run(sagaWatcher);
+saga.run(sagaWatcherPosts);
+saga.run(sagaWatcherComment);
 
 export type RootState = ReturnType<typeof store.getState>;
-export default  store 
+export default store;
