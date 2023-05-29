@@ -1,9 +1,10 @@
 import {
-  COMMENT_POST_SEARCH,
   HIDE_LOADER,
   REQUEST_COMMENTS,
   REQUEST_POSTS,
+  SEARCH_POSTS,
   SHOW_LOADER,
+  SORT_POSTS,
 } from "../types";
 
 export function showLoader() {
@@ -28,9 +29,14 @@ export function fetchComments(id: number) {
     payload: { id },
   };
 }
-export function searchComment(name: number) {
+export function sortPosts() {
   return {
-    type: COMMENT_POST_SEARCH,
-    payload: { name },
+    type: SORT_POSTS,
+  };
+}
+export function searchPosts(el:string) {
+  return {
+    type: SEARCH_POSTS,
+    payload: el
   };
 }

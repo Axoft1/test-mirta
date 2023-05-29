@@ -1,18 +1,25 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchPosts, searchComment } from "../../../store/post-service/actions";
+import {
+  fetchPosts,
+  searchPosts,
+  sortPosts,
+} from "../../../store/post-service/actions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Button, Form, Pagination, Spinner } from "react-bootstrap";
 import Post from "./Post";
 import { IPost } from "../../types";
+import Select from "../../Select/Select";
+import Search, { YourFormElement } from "../../Search/Search";
 
 const PostPage = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
-  const posts = useTypedSelector((state) => state.posts.posts);
+  const [selectedSort, setSelectedSort] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const posts = useTypedSelector((state) => state.posts.defPosts);
   const totalPage = useTypedSelector((state) => state.posts.totalPage);
   const loading = useTypedSelector((state) => state.posts.loading);
-  console.log(totalPage);
 
   let items = [];
   for (let number = 1; number <= totalPage; number++) {
@@ -26,15 +33,20 @@ const PostPage = () => {
       </Pagination.Item>
     );
   }
-// const ww = (e) => {
-//   console.log(e);
-  
-// }
-  const submit = (e: any) => {
-    e.preventDefault();
-    dispatch(searchComment(e.target[0].value));
-  };
 
+  const sortPost = (sort: string) => {
+    setSelectedSort(sort);
+    dispatch(sortPosts());
+  };
+  const submit = (el: any) => {
+    el.preventDefault();
+    // posts.filter(e => e.title.includes(searchQuery)) 
+    dispatch(searchPosts(searchQuery));
+    // setPostss(postss.filter((e) => e.title.includes(el.target[0].value)));
+  };
+  // useEffect(() => {
+  //   setPostss(posts);
+  // }, [posts]);
   useEffect(() => {
     dispatch(fetchPosts(10, page));
   }, [dispatch, page]);
@@ -46,23 +58,26 @@ const PostPage = () => {
   return (
     <div>
       <div>
-        <Form className="d-flex" onSubmit={submit}>
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-          />
-          <Button type="submit" variant="outline-success">
-            Search
-          </Button>
-        </Form>
+        <Search
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder={"Search"}
+          submit={submit}
+        />
       </div>
       <div>
-        <Pagination >{items}</Pagination>
+        <Select
+          value={selectedSort}
+          onChange={sortPost}
+          defaultValue={"Sorting"}
+          optons={[{ value: "title", name: "By name" }]}
+        />
       </div>
       <div>
         {posts && posts.map((e: IPost) => <Post key={e.id} props={e} />)}
+      </div>
+      <div>
+        <Pagination>{items}</Pagination>
       </div>
     </div>
   );
