@@ -1,30 +1,26 @@
-import React, { FC, useState } from "react";
-import { ListGroup, Button, Spinner } from "react-bootstrap";
+import React, { FC, useEffect } from "react";
+import { ListGroup, Button } from "react-bootstrap";
 import { IPost } from "../../../components/types";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchComments } from "../../../store/post-service/actions";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import CommentList from "./CommentList";
+import CommentList from "../../CommentList/CommentList";
+import { useOuside } from "../../hooks/useOutside";
 interface IProps {
   props: IPost;
 }
 
 const Post: FC<IProps> = ({ props }) => {
-  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
-  
-  const loading = useTypedSelector((state) => state.comment.loading);
-  //  console.log(comment);
-
-  const getComment = (id: number) => {
-    setShow(!show);
-    dispatch(fetchComments(id));
-  };
+  const { ref, isShow, setIsShow } = useOuside(false);
+ 
+  useEffect(() => {
+    dispatch(fetchComments(props.id));
+  }, [dispatch, isShow, props.id]);
 
   return (
-    <ListGroup>
+    <ListGroup ref={ref}>
       <ListGroup.Item>
         <div>
           <Link to={`/user/${props.userId}`}>
@@ -36,10 +32,17 @@ const Post: FC<IProps> = ({ props }) => {
           <b>{props.title}</b>
         </div>
         <div>{props.body}</div>
-        <Button onClick={() => getComment(props.id)} variant="outline-primary">
-          Комментарии
-        </Button>
-        {show && <CommentList />}
+        <div></div>
+        {isShow ? (
+          <Button onClick={() => setIsShow(false)} variant="outline-primary">
+            Комментарии
+          </Button>
+        ) : (
+          <Button onClick={() => setIsShow(true)} variant="outline-primary">
+            Комментарии
+          </Button>
+        )}
+        <div>{isShow && <CommentList />}</div>
       </ListGroup.Item>
     </ListGroup>
   );

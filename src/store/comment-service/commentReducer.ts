@@ -4,10 +4,15 @@ import {
   SHOW_LOADER_COMMENT,
   HIDE_LOADER_COMMENT,
 } from "../types";
+import { IComment } from "../../components/types";
 
-const initialState = {
+interface state {
+  comment: IComment[];
+  loading: boolean;
+}
+const initialState: state = {
   comment: [],
-  loading: false
+  loading: false,
 };
 export const commentReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {

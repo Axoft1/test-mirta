@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchPosts } from "../../../store/post-service/actions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";

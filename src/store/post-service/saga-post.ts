@@ -1,5 +1,5 @@
 import axios from "axios";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, delay, put, takeEvery } from "redux-saga/effects";
 import { hideLoader, showLoader } from "./actions";
 import { FETCH_POSTS, REQUEST_POSTS } from "../types";
 
@@ -12,6 +12,7 @@ function* sagaWorker(): Generator<any> {
     yield put(showLoader());
     const payload = yield call(getPosts);
     yield put({ type: FETCH_POSTS, payload });
+    yield delay(500);
     yield put(hideLoader());
   } catch (e) {
     console.log(e);

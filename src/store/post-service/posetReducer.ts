@@ -1,9 +1,14 @@
 import { AnyAction } from "redux";
 import { FETCH_POSTS, HIDE_LOADER, SHOW_LOADER } from "../types";
+import { IPost } from "../../components/types";
 
-const initialState = {
+interface state {
+  posts: IPost[];
+  loading: boolean
+}
+const initialState: state = {
   posts: [],
-  loading: false
+  loading: false,
 };
 export const postReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
