@@ -7,10 +7,10 @@ export function* sagaWatcherPosts() {
   yield takeEvery(REQUEST_POSTS, sagaWorker);
 }
 
-function* sagaWorker(): Generator<any> {
+function* sagaWorker(action: any): Generator<any> {
   try {
     yield put(showLoader());
-    const payload = yield call(getPosts);
+    const payload = yield call(getPosts, action.payload);
     yield put({ type: FETCH_POSTS, payload });
     yield delay(500);
     yield put(hideLoader());
@@ -19,9 +19,16 @@ function* sagaWorker(): Generator<any> {
   }
 }
 
-async function getPosts(): Promise<any> {
-  const { data } = await axios.get(
-    "https://jsonplaceholder.typicode.com/posts"
+async function getPosts(action: { limit: number; page: number }): Promise<any> {
+
+  const  data  = await axios.get(
+    "https://jsonplaceholder.typicode.com/posts",
+    {
+      params: {
+        _limit: action.limit,
+        _page: action.page,
+      },
+    }
   );
   return data;
 }

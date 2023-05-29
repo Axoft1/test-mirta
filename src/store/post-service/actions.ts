@@ -1,4 +1,5 @@
 import {
+  COMMENT_POST_SEARCH,
   HIDE_LOADER,
   REQUEST_COMMENTS,
   REQUEST_POSTS,
@@ -15,14 +16,21 @@ export function hideLoader() {
     type: HIDE_LOADER,
   };
 }
-export function fetchPosts() {
+export function fetchPosts(limit: number, page: number) {
   return {
     type: REQUEST_POSTS,
+    payload: { limit, page },
   };
 }
 export function fetchComments(id: number) {
   return {
     type: REQUEST_COMMENTS,
     payload: { id },
+  };
+}
+export function searchComment(name: number) {
+  return {
+    type: COMMENT_POST_SEARCH,
+    payload: { name },
   };
 }
