@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   fetchPosts,
@@ -6,11 +6,11 @@ import {
   sortPosts,
 } from "../../../store/post-service/actions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { Button, Form, Pagination, Spinner } from "react-bootstrap";
+import {  Pagination, Spinner } from "react-bootstrap";
 import Post from "./Post";
 import { IPost } from "../../types";
 import Select from "../../Select/Select";
-import Search, { YourFormElement } from "../../Search/Search";
+import Search from "../../Search/Search";
 
 const PostPage = () => {
   const dispatch = useDispatch();

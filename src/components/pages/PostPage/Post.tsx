@@ -1,11 +1,9 @@
 import React, { FC, useEffect } from "react";
-import { ListGroup, Button, Card, Col } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { IPost } from "../../../components/types";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-// import { fetchComments } from "../../../store/post-service/actions";
-import CommentList from "../../CommentList/CommentList";
+import { useDispatch } from "react-redux";import CommentList from "../../CommentList/CommentList";
 import { useOuside } from "../../hooks/useOutside";
 import { fetchComments } from "../../../store/comment-service/actions";
 interface IProps {
@@ -21,8 +19,8 @@ const Post: FC<IProps> = ({ props }) => {
   }, [dispatch, isShow, props.id]);
 
   return (
-    <div style={{marginBottom: '15px'}}>
-      <Card >
+    <div style={{ marginBottom: "15px" }} ref={ref}>
+      <Card>
         <Card.Header>
           <Link to={`/user/${props.userId}`}>
             <Image
