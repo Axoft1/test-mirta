@@ -1,6 +1,5 @@
 import {
   HIDE_LOADER,
-  REQUEST_COMMENTS,
   REQUEST_POSTS,
   SEARCH_POSTS,
   SHOW_LOADER,
@@ -21,12 +20,6 @@ export function fetchPosts(limit: number, page: number) {
   return {
     type: REQUEST_POSTS,
     payload: { limit, page },
-  };
-}
-export function fetchComments(id: number) {
-  return {
-    type: REQUEST_COMMENTS,
-    payload: { id },
   };
 }
 export function sortPosts() {

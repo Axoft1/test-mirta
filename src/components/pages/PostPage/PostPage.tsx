@@ -17,9 +17,9 @@ const PostPage = () => {
   const [page, setPage] = useState(1);
   const [selectedSort, setSelectedSort] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const posts = useTypedSelector((state) => state.posts.defPosts);
-  const totalPage = useTypedSelector((state) => state.posts.totalPage);
-  const loading = useTypedSelector((state) => state.posts.loading);
+  const posts = useTypedSelector((state):IPost[] => state.posts.defPosts);
+  const totalPage = useTypedSelector((state):number => state.posts.totalPage);
+  const loading = useTypedSelector((state): boolean => state.posts.loading);
 
   let items = [];
   for (let number = 1; number <= totalPage; number++) {
@@ -40,13 +40,9 @@ const PostPage = () => {
   };
   const submit = (el: any) => {
     el.preventDefault();
-    // posts.filter(e => e.title.includes(searchQuery)) 
     dispatch(searchPosts(searchQuery));
-    // setPostss(postss.filter((e) => e.title.includes(el.target[0].value)));
-  };
-  // useEffect(() => {
-  //   setPostss(posts);
-  // }, [posts]);
+    };
+
   useEffect(() => {
     dispatch(fetchPosts(10, page));
   }, [dispatch, page]);
@@ -57,7 +53,7 @@ const PostPage = () => {
 
   return (
     <div>
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <Search
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -65,7 +61,7 @@ const PostPage = () => {
           submit={submit}
         />
       </div>
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <Select
           value={selectedSort}
           onChange={sortPost}

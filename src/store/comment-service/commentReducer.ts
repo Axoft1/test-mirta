@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import {
-  COMMENT_POST,
+  FETCH_COMMENTS,
   SHOW_LOADER_COMMENT,
   HIDE_LOADER_COMMENT,
 } from "../types";
@@ -16,7 +16,7 @@ const initialState: state = {
 };
 export const commentReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
-    case COMMENT_POST:
+    case FETCH_COMMENTS:
       return { ...state, comment: action.payload };
     case SHOW_LOADER_COMMENT:
       return { ...state, loading: true };

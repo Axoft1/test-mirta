@@ -1,7 +1,7 @@
 import axios from "axios";
 import { call, delay, put, takeEvery } from "redux-saga/effects";
 import { hideLoader, showLoader } from "./actions";
-import { COMMENT_POST, REQUEST_COMMENTS } from "../types";
+import { FETCH_COMMENTS, REQUEST_COMMENTS } from "../types";
 import { IComment } from "../../components/types";
 
 export function* sagaWatcherComment() {
@@ -12,7 +12,7 @@ function* sagaWorker(action: any): Generator<any> {
   try {
     yield put(showLoader());
     const payload = yield call(getComments, action.payload.id);
-    yield put({ type: COMMENT_POST, payload });
+    yield put({ type: FETCH_COMMENTS, payload });
     yield delay(1000);
     yield put(hideLoader());
   } catch (e) {
