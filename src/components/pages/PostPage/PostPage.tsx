@@ -40,6 +40,7 @@ const PostPage = () => {
 
   const totalPage = useTypedSelector((state): number => state.posts.totalPage);
   const loading = useTypedSelector((state): boolean => state.posts.loading);
+  const error = useTypedSelector((state): boolean => state.posts.saveError);
 
   let items = [];
   for (let number = 1; number <= totalPage; number++) {
@@ -65,7 +66,9 @@ const PostPage = () => {
   if (loading) {
     return <Spinner animation="border" />;
   }
-
+  if (error) {
+    return <div>Ошибка сервера</div>;
+  }
   return (
     <div>
       <div style={{ marginBottom: "10px" }}>

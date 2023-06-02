@@ -18,6 +18,7 @@ const UserPage = () => {
   const user = useTypedSelector((state): IUser => state.user.user);
   const userPosts = useTypedSelector((state): IUser => state.user.userPosts);
   const loading = useTypedSelector((state): boolean => state.user.loading);
+  const error = useTypedSelector((state): boolean => state.user.saveError);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -29,6 +30,18 @@ const UserPage = () => {
 
   if (loading) {
     return <Spinner animation="border" />;
+  }
+  if (!error) {
+    return (
+      <>
+        <div>Ошибка сервера</div>
+        <Button
+          variant="secondary"
+          onClick={() => navigate(-1)}
+          children="Go back"
+        />
+      </>
+    );
   }
   return (
     <>
