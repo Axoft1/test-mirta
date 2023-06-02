@@ -1,7 +1,8 @@
-import React from 'react'
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import React from "react";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import avatar from "../img/721683348.jpeg";
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <Navbar bg="light" expand="xxl" style={{ marginBottom: "10px" }}>
@@ -13,20 +14,27 @@ const Header = () => {
             className="me-auto"
             style={{ alignItems: "center", gap: "20px" }}
           >
-            <Nav.Link href="/">Post</Nav.Link>
-            <Nav.Link
-              href="/about"
-              style={{ alignItems: "center", display: "flex", gap: "10px" }}
-            >
-              <Image width={70} src={avatar} style={{ borderRadius: "10px" }} />
-              <div>Алексей</div>
-              <div>axoft10@gmail.com</div>
-            </Nav.Link>
+            <Link to={"/"} style={{ textDecoration: "none" }}>
+              <Nav.Link>Post</Nav.Link>
+            </Link>
+            <Link to={"/about"} style={{ textDecoration: "none" }}>
+              <Nav.Link
+                style={{ alignItems: "center", display: "flex", gap: "10px" }}
+              >
+                <Image
+                  width={70}
+                  src={avatar}
+                  style={{ borderRadius: "10px" }}
+                />
+                <div>Алексей</div>
+                <div>axoft10@gmail.com</div>
+              </Nav.Link>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
-}
+};
 
-export default Header
+export default Header;
