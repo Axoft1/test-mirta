@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  fetchPosts,
-  searchPosts,
-  sortPosts,
-} from "../../../store/post-service/actions";
+import { fetchPosts } from "../../../store/post-service/actions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import {  Pagination, Spinner } from "react-bootstrap";
+import { Pagination, Spinner } from "react-bootstrap";
 import Post from "./Post";
 import { IPost } from "../../types";
 import Select from "../../Select/Select";
@@ -14,11 +10,35 @@ import Search from "../../Search/Search";
 
 const PostPage = () => {
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
-  const [selectedSort, setSelectedSort] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
-  const posts = useTypedSelector((state):IPost[] => state.posts.defPosts);
-  const totalPage = useTypedSelector((state):number => state.posts.totalPage);
+  const [page, setPage] = useState<number>(1);
+  const [selectedSort, setSelectedSort] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [show, setShow] = useState<boolean>(true);
+  const posts = useTypedSelector((state): IPost[] => state.posts.posts);
+
+  const sortedPosts = useMemo(() => {
+    if (selectedSort) {
+      return [...posts].sort((a, b) =>
+        a[selectedSort as keyof IPost].localeCompare(
+          b[selectedSort as keyof IPost]
+        )
+      );
+    }
+    return posts;
+  }, [selectedSort, posts]);
+
+  const sortedAndSearchedPosts = useMemo(() => {
+    if (searchQuery) {
+      setShow(false);
+    } else {
+      setShow(true);
+    }
+    return sortedPosts.filter((post) =>
+      post.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery, sortedPosts]);
+
+  const totalPage = useTypedSelector((state): number => state.posts.totalPage);
   const loading = useTypedSelector((state): boolean => state.posts.loading);
 
   let items = [];
@@ -36,13 +56,8 @@ const PostPage = () => {
 
   const sortPost = (sort: string) => {
     setSelectedSort(sort);
-    dispatch(sortPosts());
   };
-  const submit = (el: any) => {
-    el.preventDefault();
-    dispatch(searchPosts(searchQuery));
-    };
-
+ 
   useEffect(() => {
     dispatch(fetchPosts(10, page));
   }, [dispatch, page]);
@@ -58,7 +73,7 @@ const PostPage = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={"Search"}
-          submit={submit}
+          // submit={submit}
         />
       </div>
       <div style={{ marginBottom: "10px" }}>
@@ -66,15 +81,19 @@ const PostPage = () => {
           value={selectedSort}
           onChange={sortPost}
           defaultValue={"Sorting"}
-          optons={[{ value: "title", name: "By name" }]}
+          optons={[
+            { value: "title", name: "By name" },
+            { value: "body", name: "By description" },
+          ]}
         />
       </div>
       <div>
-        {posts && posts.map((e: IPost) => <Post key={e.id} props={e} />)}
+        {sortedAndSearchedPosts &&
+          sortedAndSearchedPosts.map((e: IPost) => (
+            <Post key={e.id} props={e} />
+          ))}
       </div>
-      <div>
-        <Pagination>{items}</Pagination>
-      </div>
+      <div>{show && <Pagination>{items}</Pagination>}</div>
     </div>
   );
 };

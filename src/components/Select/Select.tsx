@@ -15,7 +15,7 @@ const Select:FC<IProps> = ({ optons, defaultValue, value, onChange }) => {
       value={value}
       onChange={(event) => onChange(event.target.value)}
     >
-      <option >{defaultValue}</option>
+      <option disabled>{defaultValue}</option>
       {optons.map((option) => (
         <option key={option.value} value={option.value}>
           {option.name}

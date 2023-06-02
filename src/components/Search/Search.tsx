@@ -1,10 +1,9 @@
 import React, { FC } from 'react'
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 interface IProps {
   placeholder: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  submit: (e: React.FormEvent<YourFormElement>) => void;
 }
 export interface YourFormElement extends HTMLFormElement {
   readonly elements: FormElements;
@@ -12,9 +11,9 @@ export interface YourFormElement extends HTMLFormElement {
 interface FormElements extends HTMLFormControlsCollection {
   yourInputName: HTMLInputElement;
 }
-const Search: FC<IProps> = ({ placeholder, value, onChange, submit }) => {
+const Search: FC<IProps> = ({ placeholder, value, onChange }) => {
   return (
-    <Form className="d-flex" onSubmit={submit}>
+    <Form className="d-flex" >
       <Form.Control
         onChange={onChange}
         type="search"
@@ -23,9 +22,6 @@ const Search: FC<IProps> = ({ placeholder, value, onChange, submit }) => {
         aria-label="Search"
         value={value}
       />
-      <Button type="submit" variant="outline-success">
-        Search
-      </Button>
     </Form>
   );
 };

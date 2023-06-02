@@ -1,9 +1,7 @@
 import {
   HIDE_LOADER,
   REQUEST_POSTS,
-  SEARCH_POSTS,
   SHOW_LOADER,
-  SORT_POSTS,
 } from "../types";
 
 export function showLoader() {
@@ -22,14 +20,4 @@ export function fetchPosts(limit: number, page: number) {
     payload: { limit, page },
   };
 }
-export function sortPosts() {
-  return {
-    type: SORT_POSTS,
-  };
-}
-export function searchPosts(el:string) {
-  return {
-    type: SEARCH_POSTS,
-    payload: el
-  };
-}
+

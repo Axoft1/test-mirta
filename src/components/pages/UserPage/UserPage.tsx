@@ -38,12 +38,12 @@ const UserPage = () => {
         children="Go back"
       />
       <div>
-        <h1>{user.name}</h1>
+        <h1>{user.username}</h1>
       </div>
       <Container>
         <Row className="justify-content-md-center">
           <Col xs lg="4" sm="auto">
-            <Card style={{ width: "18rem", marginBottom: "10px"}}>
+            <Card style={{ width: "18rem", marginBottom: "10px" }}>
               <Card.Img
                 variant="top"
                 src="https://koshka.top/uploads/posts/2021-12/thumbs/1639918258_12-koshka-top-p-koshek-prikolnie-na-avatarku-13.jpg"
