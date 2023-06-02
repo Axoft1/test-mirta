@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/test-mirta/static/css/main.756af292.css",
+    "main.js": "/test-mirta/static/js/main.0e48eb8b.js",
+    "static/js/787.d492e0e3.chunk.js": "/test-mirta/static/js/787.d492e0e3.chunk.js",
+    "static/media/721683348.jpeg": "/test-mirta/static/media/721683348.b51d056958604a488dc6.jpeg",
+    "index.html": "/test-mirta/index.html",
+    "main.756af292.css.map": "/test-mirta/static/css/main.756af292.css.map",
+    "main.0e48eb8b.js.map": "/test-mirta/static/js/main.0e48eb8b.js.map",
+    "787.d492e0e3.chunk.js.map": "/test-mirta/static/js/787.d492e0e3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.756af292.css",
+    "static/js/main.0e48eb8b.js"
+  ]
+}
