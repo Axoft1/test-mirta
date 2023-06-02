@@ -14,21 +14,21 @@ const Header = () => {
             className="me-auto"
             style={{ alignItems: "center", gap: "20px" }}
           >
-            <Link to={"/"} style={{ textDecoration: "none" }}>
-              <Nav.Link>Post</Nav.Link>
+            <Link to={"/"} style={{ textDecoration: "none", color:"black" }}>
+              Post
             </Link>
-            <Link to={"/about"} style={{ textDecoration: "none" }}>
-              <Nav.Link
-                style={{ alignItems: "center", display: "flex", gap: "10px" }}
-              >
-                <Image
-                  width={70}
-                  src={avatar}
-                  style={{ borderRadius: "10px" }}
-                />
-                <div>Алексей</div>
-                <div>axoft10@gmail.com</div>
-              </Nav.Link>
+            <Link
+              to={"/about"}
+              style={{color:"black",
+                textDecoration: "none",
+                alignItems: "center",
+                display: "flex",
+                gap: "10px",
+              }}
+            >              
+              <Image width={70} src={avatar} style={{ borderRadius: "10px" }} />
+              <div>Алексей</div>
+              <div>axoft10@gmail.com</div>
             </Link>
           </Nav>
         </Navbar.Collapse>
