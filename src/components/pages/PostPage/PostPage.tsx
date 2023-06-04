@@ -40,7 +40,7 @@ const PostPage = () => {
 
   const totalPage = useTypedSelector((state): number => state.posts.totalPage);
   const loading = useTypedSelector((state): boolean => state.posts.loading);
-  const error = useTypedSelector((state): boolean => state.posts.saveError);
+  const error = useTypedSelector((state): null | string => state.posts.saveErrorPost);
 
   let items = [];
   for (let number = 1; number <= totalPage; number++) {

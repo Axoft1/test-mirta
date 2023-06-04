@@ -1,9 +1,7 @@
-import React, { Fragment } from "react";
-import logo from "./logo.svg";
+import React from "react";
+
 import "./App.css";
-// import PostPage from "./pages/PostPage/PostPage";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import AppRouter from "./components/router/AppRouter";
 import Header from "./components/Header/Header";
 import { Col, Container, Row } from "react-bootstrap";

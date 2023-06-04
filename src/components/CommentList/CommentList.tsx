@@ -5,13 +5,19 @@ import { IComment } from "../types";
 
 const CommentList = () => {
   const comment = useTypedSelector((state) => state.comment.comment);
-  const loading = useTypedSelector((state) => state.comment.loading);
+  const loading = useTypedSelector((state): boolean => state.comment.loading);
+  const error = useTypedSelector(
+    (state): null | string => state.comment.saveErrorComment
+  );
 
   if (loading) {
     return <Spinner animation="border" />;
   }
+  if (error) {
+    return <div>Ошибка сервера</div>;
+  }
   return (
-    <div >
+    <div>
       {comment.map((e: IComment) => (
         <ListGroup key={e.id}>
           <ListGroup.Item>{e.email}</ListGroup.Item>

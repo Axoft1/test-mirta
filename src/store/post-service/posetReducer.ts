@@ -12,20 +12,20 @@ interface state {
   posts: IPost[];
   totalPage: number;
   loading: boolean;
-  saveError: string;
+  saveErrorPost: null | string;
 }
 const initialState: state = {
   posts: [],
   totalPage: 0,
   loading: false,
-  saveError: "",
+  saveErrorPost: null,
 };
 export const postReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case FETCH_POSTS:
       return {
         ...state,
-        error: null,
+        saveErrorPost: null,
         posts: action.payload.data,
         totalPage: getPageCount(action.payload.headers["x-total-count"], 10),
       };

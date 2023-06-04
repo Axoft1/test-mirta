@@ -18,7 +18,7 @@ const UserPage = () => {
   const user = useTypedSelector((state): IUser => state.user.user);
   const userPosts = useTypedSelector((state): IUser => state.user.userPosts);
   const loading = useTypedSelector((state): boolean => state.user.loading);
-  const error = useTypedSelector((state): boolean => state.user.saveError);
+  const error = useTypedSelector((state): null | string => state.user.saveErrorUser);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -31,7 +31,7 @@ const UserPage = () => {
   if (loading) {
     return <Spinner animation="border" />;
   }
-  if (!error) {
+  if (error) {
     return (
       <>
         <div>Ошибка сервера</div>

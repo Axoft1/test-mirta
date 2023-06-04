@@ -1,7 +1,7 @@
 import axios from "axios";
 import { call, delay, put, takeEvery } from "redux-saga/effects";
 import { hideLoader, showLoader } from "./actions";
-import { REQUEST_USER, FETCH_USER, USER_ERROR_COMMENT } from "../types";
+import { REQUEST_USER, FETCH_USER, SAVE_ERROR_USER } from "../types";
 import { IUser } from "../../components/types";
 
 export function* sagaWatcherUser() {
@@ -16,7 +16,7 @@ function* sagaWorker(action: any): Generator<any> {
     yield put({ type: FETCH_USER, payload: { payloadUser, payloadUserPosts } });
     yield delay(1000);
   } catch (e) {
-    yield put({ type: USER_ERROR_COMMENT, e });
+    yield put({ type: SAVE_ERROR_USER, e });
   } finally {
     yield put(hideLoader());
   }
