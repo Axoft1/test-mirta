@@ -9,15 +9,12 @@ const AboutMePage = () => {
         <Card.Header>Ануфриев Алексей Витальевич</Card.Header>
         <Card.Body>
           <Card.Title>Frontend-developer</Card.Title>
-          <Card.Title>
-            Стек: Typescript, React, Axios,
-            Redux, Git
-          </Card.Title>        
+          <Card.Title>Стек: Typescript, React, Axios, Redux, Git</Card.Title>
           <Card.Text>
-            Здравствуйте, я Frontend разработчик. Разрабатывал проекты с нуля со стеком React TypeScript,
-            использовал паттерны реакта (составные компоненты, кастомные хуки,
-            геттер пропсов...) в качестве инструмента состояния использовал
-            Redux.
+            Здравствуйте, я Frontend разработчик. Разрабатывал проекты с нуля со
+            стеком React TypeScript, использовал паттерны реакта (составные
+            компоненты, кастомные хуки, геттер пропсов...) в качестве
+            инструмента состояния использовал Redux.
           </Card.Text>
           <Card.Text>
             Хочу попасть в команду сильных разработчиков что бы перенимать опыт
@@ -25,15 +22,13 @@ const AboutMePage = () => {
             программирования. Читаю литературу, прохожу курсы и интенсивы.
             Самостоятелен и ответственен.
           </Card.Text>
-          <Link
-            to={
-              "https://novosibirsk.hh.ru/resume/fd5803d8ff09ef48190039ed1f366f66543859"
-            }
-          >
-            <Button variant="primary">Резюме на Hh.ru</Button>
+          <Link to={"https://t.me/Axoft10"}>
+            <Button variant="primary">Мой Telegram</Button>
           </Link>
         </Card.Body>
-        <Card.Footer className="text-muted">Спасибо за потраченое время, хорошего вам рабочего дня</Card.Footer>
+        <Card.Footer className="text-muted">
+          Спасибо за потраченое время, хорошего вам рабочего дня
+        </Card.Footer>
       </Card>
     </>
   );
